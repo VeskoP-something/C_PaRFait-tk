@@ -1,4 +1,4 @@
-# C_PaRFait UI Builder
+# CTRL_PaRFait UI Builder
 
 *Automatically synced with your [v0.dev](https://v0.dev) deployments*
 
