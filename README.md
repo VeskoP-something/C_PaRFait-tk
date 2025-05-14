@@ -14,13 +14,7 @@ Any changes you make to your deployed app will be automatically pushed to this r
 
 Your project is live at:
 
-**[https://vercel.com/vesko-pehlivanovs-projects/v0-c-pa-rf-ait-ui-builder](https://vercel.com/vesko-pehlivanovs-projects/v0-c-pa-rf-ait-ui-builder)**
-
-## Build your app
-
-Continue building your app on:
-
-**[https://v0.dev/chat/projects/15XjsaBRETP](https://v0.dev/chat/projects/15XjsaBRETP)**
+**[https://ctrl-parfait.vercel.app/](https://ctrl-parfait.vercel.app/)**
 
 ## How It Works
 
