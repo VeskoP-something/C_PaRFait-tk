@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, ChangeEvent, MouseEvent } from "react"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -206,36 +206,251 @@ export function FrameworkTable() {
       id: "cis1",
       name: "CIS Control 1: Inventory and Control of Enterprise Assets",
       safeguards: [
-        {
-          id: "cis1.1",
-          name: "Establish and Maintain Detailed Enterprise Asset Inventory",
-          controlId: "cis1",
-          applicableAssetTypes: ["devices"],
-        },
-        {
-          id: "cis1.2",
-          name: "Address Unauthorized Assets",
-          controlId: "cis1",
-          applicableAssetTypes: ["devices"],
-        },
+        { id: "cis1.1", name: "Establish and Maintain Detailed Enterprise Asset Inventory", controlId: "cis1", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis1.2", name: "Address Unauthorized Assets", controlId: "cis1", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis1.3", name: "Utilize an Active Discovery Tool", controlId: "cis1", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis1.4", name: "Use DHCP Logging to Update Asset Inventory", controlId: "cis1", applicableAssetTypes: ["devices"] },
+        { id: "cis1.5", name: "Use a Passive Asset Discovery Tool", controlId: "cis1", applicableAssetTypes: ["devices", "software"] },
       ],
     },
     {
       id: "cis2",
       name: "CIS Control 2: Inventory and Control of Software Assets",
       safeguards: [
-        {
-          id: "cis2.1",
-          name: "Establish and Maintain Software Inventory",
-          controlId: "cis2",
-          applicableAssetTypes: ["software"],
-        },
-        {
-          id: "cis2.2",
-          name: "Ensure Authorized Software is Currently Supported",
-          controlId: "cis2",
-          applicableAssetTypes: ["software"],
-        },
+        { id: "cis2.1", name: "Establish and Maintain a Software Inventory", controlId: "cis2", applicableAssetTypes: ["software"] },
+        { id: "cis2.2", name: "Ensure Authorized Software is Currently Supported", controlId: "cis2", applicableAssetTypes: ["software"] },
+        { id: "cis2.3", name: "Address Unapproved Software", controlId: "cis2", applicableAssetTypes: ["software"] },
+        { id: "cis2.4", name: "Utilize Automated Software Inventory Tools", controlId: "cis2", applicableAssetTypes: ["software"] },
+        { id: "cis2.5", name: "Allowlist Authorized Software", controlId: "cis2", applicableAssetTypes: ["software"] },
+        { id: "cis2.6", name: "Allowlist Authorized Libraries", controlId: "cis2", applicableAssetTypes: ["software"] },
+        { id: "cis2.7", name: "Allowlist Authorized Scripts", controlId: "cis2", applicableAssetTypes: ["software"] },
+      ],
+    },
+    {
+      id: "cis3",
+      name: "CIS Control 3: Data Protection",
+      safeguards: [
+        { id: "cis3.1", name: "Establish and Maintain a Data Management Process", controlId: "cis3", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis3.2", name: "Establish and Maintain a Data Inventory", controlId: "cis3", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis3.3", name: "Configure Data Access Control Lists", controlId: "cis3", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis3.4", name: "Enforce Data Retention", controlId: "cis3", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis3.5", name: "Securely Dispose of Data", controlId: "cis3", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis3.6", name: "Encrypt Data on End-User Devices", controlId: "cis3", applicableAssetTypes: ["devices"] },
+        { id: "cis3.7", name: "Establish and Maintain a Data Classification Scheme", controlId: "cis3", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis3.8", name: "Document Data Flows", controlId: "cis3", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis3.9", name: "Encrypt Data on Removable Media", controlId: "cis3", applicableAssetTypes: ["devices"] },
+        { id: "cis3.10", name: "Encrypt Sensitive Data in Transit", controlId: "cis3", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis3.11", name: "Encrypt Sensitive Data at Rest", controlId: "cis3", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis3.12", name: "Segment Data Processing and Storage Based on Sensitivity", controlId: "cis3", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis3.13", name: "Deploy Data Loss Prevention", controlId: "cis3", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis3.14", name: "Log and Alert on Sensitive Data Access and Exfiltration", controlId: "cis3", applicableAssetTypes: ["devices", "software"] },
+      ],
+    },
+    {
+      id: "cis4",
+      name: "CIS Control 4: Secure Configuration of Enterprise Assets and Software",
+      safeguards: [
+        { id: "cis4.1", name: "Establish and Maintain a Secure Configuration Process", controlId: "cis4", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis4.2", name: "Establish and Maintain Secure Configurations for Network Infrastructure", controlId: "cis4", applicableAssetTypes: ["devices"] },
+        { id: "cis4.3", name: "Configure Automatic Session Locking on Enterprise Assets", controlId: "cis4", applicableAssetTypes: ["devices"] },
+        { id: "cis4.4", name: "Implement and Manage a Secure Configuration Baseline", controlId: "cis4", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis4.5", name: "Securely Manage Enterprise Assets and Software", controlId: "cis4", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis4.6", name: "Manage Secure Configurations for Mobile Devices", controlId: "cis4", applicableAssetTypes: ["devices"] },
+        { id: "cis4.7", name: "Manage Secure Configurations for End-User Devices", controlId: "cis4", applicableAssetTypes: ["devices"] },
+        { id: "cis4.8", name: "Manage Secure Configurations for Servers", controlId: "cis4", applicableAssetTypes: ["devices"] },
+        { id: "cis4.9", name: "Manage Secure Configurations for Applications", controlId: "cis4", applicableAssetTypes: ["software"] },
+        { id: "cis4.10", name: "Manage Secure Configurations for Cloud Services", controlId: "cis4", applicableAssetTypes: ["software"] }, // Assuming cloud services are a type of software/platform
+        { id: "cis4.11", name: "Separate Enterprise Workspaces on End-User Devices", controlId: "cis4", applicableAssetTypes: ["devices"] },
+        { id: "cis4.12", name: "Implement and Manage a Configuration Monitoring System", controlId: "cis4", applicableAssetTypes: ["devices", "software"] },
+      ],
+    },
+    {
+      id: "cis5",
+      name: "CIS Control 5: Account Management",
+      safeguards: [
+        { id: "cis5.1", name: "Maintain an Inventory of Authentication and Authorization Systems", controlId: "cis5", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis5.2", name: "Maintain an Inventory of Accounts", controlId: "cis5", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis5.3", name: "Use Unique Identifiers", controlId: "cis5", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis5.4", name: "Disable Dormant Accounts", controlId: "cis5", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis5.5", name: "Disable Default Accounts", controlId: "cis5", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis5.6", name: "Centralize Account Management", controlId: "cis5", applicableAssetTypes: ["devices", "software"] },
+      ],
+    },
+    {
+      id: "cis6",
+      name: "CIS Control 6: Access Control Management",
+      safeguards: [
+        { id: "cis6.1", name: "Establish an Access Granting Process", controlId: "cis6", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis6.2", name: "Establish an Access Revoking Process", controlId: "cis6", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis6.3", name: "Require Multi-Factor Authentication for Externally-Exposed Applications", controlId: "cis6", applicableAssetTypes: ["software"] },
+        { id: "cis6.4", name: "Require Multi-Factor Authentication for Remote Network Access", controlId: "cis6", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis6.5", name: "Require Multi-Factor Authentication for Privileged Access", controlId: "cis6", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis6.6", name: "Require Multi-Factor Authentication for All Users", controlId: "cis6", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis6.7", name: "Manage and Regularly Review Access Rights", controlId: "cis6", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis6.8", name: "Manage and Regularly Review Privileged Access Rights", controlId: "cis6", applicableAssetTypes: ["devices", "software"] },
+      ],
+    },
+    {
+      id: "cis7",
+      name: "CIS Control 7: Continuous Vulnerability Management",
+      safeguards: [
+        { id: "cis7.1", name: "Establish and Maintain a Vulnerability Management Process", controlId: "cis7", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis7.2", name: "Establish and Maintain a Remediation Process", controlId: "cis7", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis7.3", name: "Perform Automated Operating System Patch Management", controlId: "cis7", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis7.4", name: "Perform Automated Application Patch Management", controlId: "cis7", applicableAssetTypes: ["software"] },
+        { id: "cis7.5", name: "Perform Automated Vulnerability Scans of Internal Enterprise Assets", controlId: "cis7", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis7.6", name: "Perform Automated Vulnerability Scans of Externally-Exposed Enterprise Assets", controlId: "cis7", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis7.7", name: "Remediate Detected Vulnerabilities", controlId: "cis7", applicableAssetTypes: ["devices", "software"] },
+      ],
+    },
+    {
+      id: "cis8",
+      name: "CIS Control 8: Audit Log Management",
+      safeguards: [
+        { id: "cis8.1", name: "Establish and Maintain an Audit Log Management Process", controlId: "cis8", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis8.2", name: "Collect Audit Logs", controlId: "cis8", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis8.3", name: "Ensure Adequate Audit Log Storage", controlId: "cis8", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis8.4", name: "Standardize Time Synchronization", controlId: "cis8", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis8.5", name: "Collect Detailed Audit Logs", controlId: "cis8", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis8.6", name: "Collect Centralized Audit Trails", controlId: "cis8", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis8.7", name: "Retain Audit Logs", controlId: "cis8", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis8.8", name: "Protect Audit Logs", controlId: "cis8", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis8.9", name: "Review Audit Logs", controlId: "cis8", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis8.10", name: "Collect Service Provider Audit Logs", controlId: "cis8", applicableAssetTypes: ["devices", "software"] }, // Assuming service providers manage assets
+      ],
+    },
+    {
+      id: "cis9",
+      name: "CIS Control 9: Email and Web Browser Protections",
+      safeguards: [
+        { id: "cis9.1", name: "Use Only Fully Supported Browsers and Email Clients", controlId: "cis9", applicableAssetTypes: ["software"] },
+        { id: "cis9.2", name: "Enforce Network-Based URL Filters", controlId: "cis9", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis9.3", name: "Implement DMARC, DKIM, and SPF", controlId: "cis9", applicableAssetTypes: ["software"] }, // Primarily for email systems
+        { id: "cis9.4", name: "Block Unnecessary File Types", controlId: "cis9", applicableAssetTypes: ["software"] }, // Email and web
+        { id: "cis9.5", name: "Deploy Email Sender Authentication", controlId: "cis9", applicableAssetTypes: ["software"] },
+        { id: "cis9.6", name: "Train Users on Email and Web Security", controlId: "cis9", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis9.7", name: "Implement Spam Filters", controlId: "cis9", applicableAssetTypes: ["software"] },
+      ],
+    },
+    {
+      id: "cis10",
+      name: "CIS Control 10: Malware Defenses",
+      safeguards: [
+        { id: "cis10.1", name: "Deploy and Maintain Anti-Malware Software", controlId: "cis10", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis10.2", name: "Configure Automatic Anti-Malware Signature Updates", controlId: "cis10", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis10.3", name: "Enable Anti-Exploitation Features", controlId: "cis10", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis10.4", name: "Centrally Manage Anti-Malware Solutions", controlId: "cis10", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis10.5", name: "Use Behavior-Based Anti-Malware", controlId: "cis10", applicableAssetTypes: ["devices", "software"] },
+      ],
+    },
+    {
+      id: "cis11",
+      name: "CIS Control 11: Data Recovery",
+      safeguards: [
+        { id: "cis11.1", name: "Establish and Maintain a Data Recovery Process", controlId: "cis11", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis11.2", name: "Perform Automated Backups", controlId: "cis11", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis11.3", name: "Protect Backup Data", controlId: "cis11", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis11.4", name: "Isolate Backup Data", controlId: "cis11", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis11.5", name: "Test Data Recovery", controlId: "cis11", applicableAssetTypes: ["devices", "software"] },
+      ],
+    },
+    {
+      id: "cis12",
+      name: "CIS Control 12: Network Infrastructure Management",
+      safeguards: [
+        { id: "cis12.1", name: "Update Network Device Documentation", controlId: "cis12", applicableAssetTypes: ["devices"] },
+        { id: "cis12.2", name: "Securely Manage Network Devices", controlId: "cis12", applicableAssetTypes: ["devices"] },
+        { id: "cis12.3", name: "Use Secure Network Management Protocols", controlId: "cis12", applicableAssetTypes: ["devices"] },
+        { id: "cis12.4", name: "Disable Unused Network Ports and Services", controlId: "cis12", applicableAssetTypes: ["devices"] },
+        { id: "cis12.5", name: "Filter Network Traffic Between Networks", controlId: "cis12", applicableAssetTypes: ["devices"] },
+      ],
+    },
+    {
+      id: "cis13",
+      name: "CIS Control 13: Network Monitoring and Defense",
+      safeguards: [
+        { id: "cis13.1", name: "Centralize Security Event Alerting", controlId: "cis13", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis13.2", name: "Deploy a Host-Based Intrusion Detection/Prevention System", controlId: "cis13", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis13.3", name: "Deploy a Network Intrusion Detection/Prevention System", controlId: "cis13", applicableAssetTypes: ["devices"] },
+        { id: "cis13.4", name: "Perform Traffic Filtering", controlId: "cis13", applicableAssetTypes: ["devices"] },
+        { id: "cis13.5", name: "Manage Access Control for Remote Access", controlId: "cis13", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis13.6", name: "Collect Network Traffic Flow Logs", controlId: "cis13", applicableAssetTypes: ["devices"] },
+        { id: "cis13.7", name: "Deploy Port-Level Access Control", controlId: "cis13", applicableAssetTypes: ["devices"] },
+        { id: "cis13.8", name: "Detect Unauthorized Wireless Access Points", controlId: "cis13", applicableAssetTypes: ["devices"] },
+        { id: "cis13.9", name: "Use a Security Information and Event Management (SIEM) System", controlId: "cis13", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis13.10", name: "Participate in Threat Information Sharing Communities", controlId: "cis13", applicableAssetTypes: ["devices", "software"] }, // Organizational
+      ],
+    },
+    {
+      id: "cis14",
+      name: "CIS Control 14: Security Awareness and Skills Training",
+      safeguards: [
+        { id: "cis14.1", name: "Establish and Maintain a Security Awareness Program", controlId: "cis14", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis14.2", name: "Train Workforce Members to Recognize Social Engineering Attacks", controlId: "cis14", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis14.3", name: "Train Workforce Members on Authentication Best Practices", controlId: "cis14", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis14.4", name: "Train Workforce Members on Data Handling Best Practices", controlId: "cis14", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis14.5", name: "Train Workforce Members on Causes of Unintentional Data Exposure", controlId: "cis14", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis14.6", name: "Train Workforce Members to Identify and Report Incidents", controlId: "cis14", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis14.7", name: "Train Workforce on Identifying and Reporting Missing Security Updates", controlId: "cis14", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis14.8", name: "Train Workforce on Dangers of Connecting to and Transmitting Data Over Insecure Networks", controlId: "cis14", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis14.9", name: "Provide Role-Specific Security Awareness and Skills Training", controlId: "cis14", applicableAssetTypes: ["devices", "software"] },
+      ],
+    },
+    {
+      id: "cis15",
+      name: "CIS Control 15: Service Provider Management",
+      safeguards: [
+        { id: "cis15.1", name: "Maintain an Inventory of Service Providers", controlId: "cis15", applicableAssetTypes: ["devices", "software"] }, // Organizational
+        { id: "cis15.2", name: "Establish and Maintain a Service Provider Management Policy", controlId: "cis15", applicableAssetTypes: ["devices", "software"] }, // Organizational
+        { id: "cis15.3", name: "Classify Service Providers", controlId: "cis15", applicableAssetTypes: ["devices", "software"] }, // Organizational
+        { id: "cis15.4", name: "Ensure Service Provider Contracts Include Security Requirements", controlId: "cis15", applicableAssetTypes: ["devices", "software"] }, // Organizational
+        { id: "cis15.5", name: "Assess Service Providers", controlId: "cis15", applicableAssetTypes: ["devices", "software"] }, // Organizational
+        { id: "cis15.6", name: "Monitor Service Providers", controlId: "cis15", applicableAssetTypes: ["devices", "software"] }, // Organizational
+        { id: "cis15.7", name: "Securely Decommission Service Providers", controlId: "cis15", applicableAssetTypes: ["devices", "software"] }, // Organizational
+      ],
+    },
+    {
+      id: "cis16",
+      name: "CIS Control 16: Application Software Security",
+      safeguards: [
+        { id: "cis16.1", name: "Establish and Maintain a Secure Application Development Process", controlId: "cis16", applicableAssetTypes: ["software"] },
+        { id: "cis16.2", name: "Address Security Vulnerabilities in Dedicated or Segregated Environments", controlId: "cis16", applicableAssetTypes: ["software"] },
+        { id: "cis16.3", name: "Use Up-to-Date and Trusted Third-Party Software Components", controlId: "cis16", applicableAssetTypes: ["software"] },
+        { id: "cis16.4", name: "Establish and Maintain an Inventory of Custom and Third-Party Software", controlId: "cis16", applicableAssetTypes: ["software"] },
+        { id: "cis16.5", name: "Use Standard Hardening Configuration Templates for Application Infrastructure", controlId: "cis16", applicableAssetTypes: ["software"] },
+        { id: "cis16.6", name: "Separate Production and Non-Production Environments", controlId: "cis16", applicableAssetTypes: ["software"] },
+        { id: "cis16.7", name: "Train Developers in Application Security Concepts and Secure Coding", controlId: "cis16", applicableAssetTypes: ["software"] }, // Primarily for developers
+        { id: "cis16.8", name: "Apply Secure Design Principles in Application Architectures", controlId: "cis16", applicableAssetTypes: ["software"] },
+        { id: "cis16.9", name: "Leverage Vetted Modules or Services for Application Security Components", controlId: "cis16", applicableAssetTypes: ["software"] },
+        { id: "cis16.10", name: "Perform Application Threat Modeling", controlId: "cis16", applicableAssetTypes: ["software"] },
+        { id: "cis16.11", name: "Perform Automated and Manual Application Security Testing", controlId: "cis16", applicableAssetTypes: ["software"] },
+        { id: "cis16.12", name: "Perform Root Cause Analysis on Security Vulnerabilities", controlId: "cis16", applicableAssetTypes: ["software"] },
+      ],
+    },
+    {
+      id: "cis17",
+      name: "CIS Control 17: Incident Response Management",
+      safeguards: [
+        { id: "cis17.1", name: "Designate Personnel to Manage Incident Handling", controlId: "cis17", applicableAssetTypes: ["devices", "software"] }, // Organizational
+        { id: "cis17.2", name: "Establish and Maintain Contact Information for Reporting Security Incidents", controlId: "cis17", applicableAssetTypes: ["devices", "software"] }, // Organizational
+        { id: "cis17.3", name: "Establish and Maintain an Enterprise Process for Reporting Incidents", controlId: "cis17", applicableAssetTypes: ["devices", "software"] }, // Organizational
+        { id: "cis17.4", name: "Establish and Maintain an Incident Response Plan", controlId: "cis17", applicableAssetTypes: ["devices", "software"] }, // Organizational
+        { id: "cis17.5", name: "Assign Incident Handling Roles and Responsibilities", controlId: "cis17", applicableAssetTypes: ["devices", "software"] }, // Organizational
+        { id: "cis17.6", name: "Define Incident Severity Levels", controlId: "cis17", applicableAssetTypes: ["devices", "software"] }, // Organizational
+        { id: "cis17.7", name: "Conduct Incident Response Exercises", controlId: "cis17", applicableAssetTypes: ["devices", "software"] }, // Organizational
+        { id: "cis17.8", name: "Conduct Post-Incident Reviews", controlId: "cis17", applicableAssetTypes: ["devices", "software"] }, // Organizational
+        { id: "cis17.9", name: "Establish and Maintain Information Retention Process for Incident Response", controlId: "cis17", applicableAssetTypes: ["devices", "software"] }, // Organizational
+      ],
+    },
+    {
+      id: "cis18",
+      name: "CIS Control 18: Penetration Testing",
+      safeguards: [
+        { id: "cis18.1", name: "Establish and Maintain a Penetration Testing Program", controlId: "cis18", applicableAssetTypes: ["devices", "software"] }, // Organizational
+        { id: "cis18.2", name: "Perform Regular External Penetration Tests", controlId: "cis18", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis18.3", name: "Perform Regular Internal Penetration Tests", controlId: "cis18", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis18.4", name: "Remediate Penetration Test Findings", controlId: "cis18", applicableAssetTypes: ["devices", "software"] },
+        { id: "cis18.5", name: "Validate Security Measures After Major Changes", controlId: "cis18", applicableAssetTypes: ["devices", "software"] },
       ],
     },
   ])
@@ -374,35 +589,35 @@ export function FrameworkTable() {
 
   // Helper function to get cell value
   const getCellValue = (rowId: string, attributeId: string) => {
-    const cell = cellValues.find((c) => c.rowId === rowId && c.attributeId === attributeId)
+    const cell = cellValues.find((c: CellValue) => c.rowId === rowId && c.attributeId === attributeId)
     return cell ? cell.value : ""
   }
 
   // Helper function to get outcome value
   const getOutcomeValue = (rowId: string, attributeId: string) => {
-    const outcome = outcomeValues.find((o) => o.rowId === rowId && o.attributeId === attributeId)
+    const outcome = outcomeValues.find((o: OutcomeValue) => o.rowId === rowId && o.attributeId === attributeId)
     return outcome ? outcome.value : ""
   }
 
   // Helper function to get enforcement point value
   const getEnforcementPoint = (rowId: string) => {
-    const point = enforcementPoints.find((p) => p.rowId === rowId)
+    const point = enforcementPoints.find((p: EnforcementPoint) => p.rowId === rowId)
     return point ? point.value : ""
   }
 
   // Helper function to get safeguard name
   const getSafeguardName = (safeguardId: string) => {
     for (const control of controls) {
-      const safeguard = control.safeguards.find((s) => s.id === safeguardId)
+      const safeguard = control.safeguards.find((s: Safeguard) => s.id === safeguardId)
       if (safeguard) return safeguard.name
     }
     return safeguardId
   }
 
   // Helper function to get safeguard by ID
-  const getSafeguard = (safeguardId: string) => {
+  const getSafeguard = (safeguardId: string): Safeguard | null => {
     for (const control of controls) {
-      const safeguard = control.safeguards.find((s) => s.id === safeguardId)
+      const safeguard = control.safeguards.find((s: Safeguard) => s.id === safeguardId)
       if (safeguard) return safeguard
     }
     return null
@@ -414,7 +629,7 @@ export function FrameworkTable() {
     if (row.assetSubclassId && row.assetSubclassId !== row.assetClassId && row.assetSubclassId !== row.assetTypeId) {
       for (const assetType of assetTypes) {
         for (const assetClass of assetType.classes) {
-          const subclass = assetClass.subclasses.find((s) => s.id === row.assetSubclassId)
+          const subclass = assetClass.subclasses.find((s: AssetSubclass) => s.id === row.assetSubclassId)
           if (subclass) {
             // For software subclasses, include the class name since Services, Libraries, APIs appear in both classes
             if (assetType.id === "software") {
@@ -429,14 +644,14 @@ export function FrameworkTable() {
     // If it's a class
     if (row.assetClassId && row.assetClassId !== row.assetTypeId) {
       for (const assetType of assetTypes) {
-        const assetClass = assetType.classes.find((ac) => ac.id === row.assetClassId)
+        const assetClass = assetType.classes.find((ac: AssetClass) => ac.id === row.assetClassId)
         if (assetClass) return assetClass.name
       }
     }
 
     // If it's a type
     if (row.assetTypeId) {
-      const assetType = assetTypes.find((at) => at.id === row.assetTypeId)
+      const assetType = assetTypes.find((at: AssetType) => at.id === row.assetTypeId)
       if (assetType) return assetType.name
     }
 
@@ -446,7 +661,7 @@ export function FrameworkTable() {
   // Helper function to get asset type name
   const getAssetTypeName = (assetTypeId?: string) => {
     if (!assetTypeId) return ""
-    const assetType = assetTypes.find((at) => at.id === assetTypeId)
+    const assetType = assetTypes.find((at: AssetType) => at.id === assetTypeId)
     return assetType ? assetType.name : ""
   }
 
@@ -454,7 +669,7 @@ export function FrameworkTable() {
   const getAssetClassName = (assetClassId?: string) => {
     if (!assetClassId) return ""
     for (const assetType of assetTypes) {
-      const assetClass = assetType.classes.find((ac) => ac.id === assetClassId)
+      const assetClass = assetType.classes.find((ac: AssetClass) => ac.id === assetClassId)
       if (assetClass) return assetClass.name
     }
     return ""
@@ -464,7 +679,7 @@ export function FrameworkTable() {
   const getAssetSubclassName = (assetSubclassId: string) => {
     for (const assetType of assetTypes) {
       for (const assetClass of assetType.classes) {
-        const subclass = assetClass.subclasses.find((s) => s.id === assetSubclassId)
+        const subclass = assetClass.subclasses.find((s: AssetSubclass) => s.id === assetSubclassId)
         if (subclass) return subclass.name
       }
     }
@@ -474,7 +689,7 @@ export function FrameworkTable() {
   // Helper function to get control name from safeguard ID
   const getControlNameFromSafeguard = (safeguardId: string) => {
     for (const control of controls) {
-      if (control.safeguards.some((s) => s.id === safeguardId)) {
+      if (control.safeguards.some((s: Safeguard) => s.id === safeguardId)) {
         return control.name
       }
     }
@@ -482,11 +697,11 @@ export function FrameworkTable() {
   }
 
   // Get applicable asset types for a safeguard
-  const getApplicableAssetTypes = (safeguardId: string) => {
+  const getApplicableAssetTypes = (safeguardId: string): AssetType[] => {
     const safeguard = getSafeguard(safeguardId)
     if (!safeguard) return []
 
-    return assetTypes.filter((type) => safeguard.applicableAssetTypes.includes(type.id))
+    return assetTypes.filter((type: AssetType) => safeguard.applicableAssetTypes.includes(type.id))
   }
 
   // Get applicable asset selections for a safeguard
@@ -500,7 +715,7 @@ export function FrameworkTable() {
     const applicableTypes = getApplicableAssetTypes(safeguardId)
 
     // Add asset types, classes, and subclasses
-    applicableTypes.forEach((assetType) => {
+    applicableTypes.forEach((assetType: AssetType) => {
       // Add the type itself
       selections.push({
         id: assetType.id,
@@ -509,7 +724,7 @@ export function FrameworkTable() {
       })
 
       // Add all classes for this type
-      assetType.classes.forEach((assetClass) => {
+      assetType.classes.forEach((assetClass: AssetClass) => {
         selections.push({
           id: assetClass.id,
           name: assetClass.name,
@@ -518,7 +733,7 @@ export function FrameworkTable() {
         })
 
         // Add all subclasses for this class
-        assetClass.subclasses.forEach((subclass) => {
+        assetClass.subclasses.forEach((subclass: AssetSubclass) => {
           // For software subclasses, include the class name since Services, Libraries, APIs appear in both classes
           const displayName = assetType.id === "software" ? `${subclass.name} (${assetClass.name})` : subclass.name
 
@@ -542,13 +757,13 @@ export function FrameworkTable() {
     const newRowId = `${row.safeguardId}-${selection.id}`
 
     // Check if this combination already exists
-    if (rows.some((r) => r.id === newRowId && r.id !== row.id)) {
+    if (rows.some((r: { id: string }) => r.id === newRowId && r.id !== row.id)) {
       alert("This combination already exists!")
       return
     }
 
     // Update the row
-    const updatedRows = rows.map((r) => {
+    const updatedRows = rows.map((r: typeof rows[number]) => {
       if (r.id === row.id) {
         return {
           ...r,
@@ -568,7 +783,7 @@ export function FrameworkTable() {
     })
 
     // Update cell values with the new row ID
-    const updatedCellValues = cellValues.map((cell) => {
+    const updatedCellValues = cellValues.map((cell: CellValue) => {
       if (cell.rowId === row.id) {
         return {
           ...cell,
@@ -579,7 +794,7 @@ export function FrameworkTable() {
     })
 
     // Update outcome values with the new row ID
-    const updatedOutcomeValues = outcomeValues.map((outcome) => {
+    const updatedOutcomeValues = outcomeValues.map((outcome: OutcomeValue) => {
       if (outcome.rowId === row.id) {
         return {
           ...outcome,
@@ -590,7 +805,7 @@ export function FrameworkTable() {
     })
 
     // Update enforcement points with the new row ID
-    const updatedEnforcementPoints = enforcementPoints.map((point) => {
+    const updatedEnforcementPoints = enforcementPoints.map((point: EnforcementPoint) => {
       if (point.rowId === row.id) {
         return {
           ...point,
@@ -630,7 +845,7 @@ export function FrameworkTable() {
     if (!editingCell) return
 
     const { rowId, attributeId } = editingCell
-    const existingCellIndex = cellValues.findIndex((c) => c.rowId === rowId && c.attributeId === attributeId)
+    const existingCellIndex = cellValues.findIndex((c: CellValue) => c.rowId === rowId && c.attributeId === attributeId)
 
     if (existingCellIndex >= 0) {
       // Update existing cell
@@ -651,7 +866,7 @@ export function FrameworkTable() {
     if (!editingOutcomeCell) return
 
     const { rowId, attributeId } = editingOutcomeCell
-    const existingOutcomeIndex = outcomeValues.findIndex((o) => o.rowId === rowId && o.attributeId === attributeId)
+    const existingOutcomeIndex = outcomeValues.findIndex((o: OutcomeValue) => o.rowId === rowId && o.attributeId === attributeId)
 
     if (existingOutcomeIndex >= 0) {
       // Update existing outcome
@@ -669,7 +884,7 @@ export function FrameworkTable() {
 
   // Handle enforcement point save
   const handleSaveEnforcementPoint = (rowId: string) => {
-    const existingPointIndex = enforcementPoints.findIndex((p) => p.rowId === rowId)
+    const existingPointIndex = enforcementPoints.findIndex((p: EnforcementPoint) => p.rowId === rowId)
 
     if (existingPointIndex >= 0) {
       // Update existing enforcement point
@@ -705,14 +920,14 @@ export function FrameworkTable() {
 
   // Get asset classes for a selected asset type
   const getAssetClassesForType = (assetTypeId: string) => {
-    const assetType = assetTypes.find((type) => type.id === assetTypeId)
+    const assetType = assetTypes.find((type: AssetType) => type.id === assetTypeId)
     return assetType ? assetType.classes : []
   }
 
   // Get asset subclasses for a selected asset class
   const getAssetSubclassesForClass = (assetClassId: string) => {
     for (const assetType of assetTypes) {
-      const assetClass = assetType.classes.find((cls) => cls.id === assetClassId)
+      const assetClass = assetType.classes.find((cls: AssetClass) => cls.id === assetClassId)
       if (assetClass) {
         return assetClass.subclasses
       }
@@ -727,7 +942,7 @@ export function FrameworkTable() {
     const newRowId = `${newRowSafeguard}-${newRowAssetSubclass}`
 
     // Check if row already exists
-    if (rows.some((r) => r.id === newRowId)) {
+    if (rows.some((r: { id: string }) => r.id === newRowId)) {
       alert("This combination already exists!")
       return
     }
@@ -746,7 +961,7 @@ export function FrameworkTable() {
       // Check if the selection is an asset class
       for (const assetType of assetTypes) {
         if (assetType.id === newRowAssetType) {
-          const assetClass = assetType.classes.find((cls) => cls.id === newRowAssetSubclass)
+          const assetClass = assetType.classes.find((cls: AssetClass) => cls.id === newRowAssetSubclass)
           if (assetClass) {
             assetClassId = assetClass.id
             assetTypeId = assetType.id
@@ -761,7 +976,7 @@ export function FrameworkTable() {
       for (const assetType of assetTypes) {
         for (const assetClass of assetType.classes) {
           // Check if the selection is a subclass
-          const subclass = assetClass.subclasses.find((sub) => sub.id === newRowAssetSubclass)
+          const subclass = assetClass.subclasses.find((sub: AssetSubclass) => sub.id === newRowAssetSubclass)
           if (subclass) {
             assetClassId = assetClass.id
             assetTypeId = assetType.id
@@ -801,16 +1016,16 @@ export function FrameworkTable() {
     if (!rowToDelete) return
 
     // Remove the row
-    setRows(rows.filter((row) => row.id !== rowToDelete))
+    setRows(rows.filter((row: { id: string }) => row.id !== rowToDelete))
 
     // Remove all cell values associated with this row
-    setCellValues(cellValues.filter((cell) => cell.rowId !== rowToDelete))
+    setCellValues(cellValues.filter((cell: CellValue) => cell.rowId !== rowToDelete))
 
     // Remove all outcome values associated with this row
-    setOutcomeValues(outcomeValues.filter((outcome) => outcome.rowId !== rowToDelete))
+    setOutcomeValues(outcomeValues.filter((outcome: OutcomeValue) => outcome.rowId !== rowToDelete))
 
     // Remove enforcement point associated with this row
-    setEnforcementPoints(enforcementPoints.filter((point) => point.rowId !== rowToDelete))
+    setEnforcementPoints(enforcementPoints.filter((point: EnforcementPoint) => point.rowId !== rowToDelete))
 
     // Reset state
     setRowToDelete(null)
@@ -819,12 +1034,12 @@ export function FrameworkTable() {
 
   // Get all safeguards from all controls
   const getAllSafeguards = () => {
-    return controls.flatMap((control) => control.safeguards)
+    return controls.flatMap((control: Control) => control.safeguards)
   }
 
   // Prepare data for export
   const prepareExportData = (useOutcomes = false): ExportRow[] => {
-    return rows.map((row) => {
+    return rows.map((row: { id: string; safeguardId: string; assetTypeId?: string; assetClassId?: string; assetSubclassId: string }) => {
       const exportRow: ExportRow = {
         control: getControlNameFromSafeguard(row.safeguardId),
         safeguard: getSafeguardName(row.safeguardId),
@@ -835,7 +1050,7 @@ export function FrameworkTable() {
       }
 
       // Add attribute values
-      attributes.forEach((attr) => {
+      attributes.forEach((attr: Attribute) => {
         if (useOutcomes) {
           exportRow[attr.name] = getOutcomeValue(row.id, attr.id)
         } else {
@@ -883,7 +1098,7 @@ export function FrameworkTable() {
       "Asset Class",
       "Asset Subclass",
       "Enforcement Point",
-      ...attributes.map((a) => a.name),
+      ...attributes.map((a: Attribute) => a.name),
     ]
 
     // Create CSV rows
@@ -897,7 +1112,7 @@ export function FrameworkTable() {
           `"${row.assetClass}"`,
           `"${row.assetSubclass}"`,
           `"${row.enforcementPoint}"`,
-          ...attributes.map((attr) => `"${row[attr.name] || ""}"`),
+          ...attributes.map((attr: Attribute) => `"${row[attr.name] || ""}"`),
         ].join(","),
       ),
     ]
@@ -972,7 +1187,7 @@ export function FrameworkTable() {
               <th>Asset Class</th>
               <th>Asset Subclass</th>
               <th>Enforcement Point</th>
-              ${attributes.map((attr) => `<th>${attr.name}</th>`).join("")}
+              ${attributes.map((attr: Attribute) => `<th>${attr.name}</th>`).join("")}
             </tr>
           </thead>
           <tbody>
@@ -986,7 +1201,7 @@ export function FrameworkTable() {
                 <td>${row.assetClass}</td>
                 <td>${row.assetSubclass}</td>
                 <td>${row.enforcementPoint}</td>
-                ${attributes.map((attr) => `<td>${row[attr.name] || ""}</td>`).join("")}
+                ${attributes.map((attr: Attribute) => `<td>${row[attr.name] || ""}</td>`).join("")}
               </tr>
             `,
               )
@@ -1090,7 +1305,7 @@ export function FrameworkTable() {
                   <th>Asset Type</th>
                   <th>Asset Class/Subclass</th>
                   <th>Enforcement Point</th>
-                  ${attributes.map((attr) => `<th>${attr.name}</th>`).join("")}
+                  ${attributes.map((attr: Attribute) => `<th>${attr.name}</th>`).join("")}
                 </tr>
               </thead>
               <tbody>
@@ -1102,7 +1317,7 @@ export function FrameworkTable() {
                     <td>${row.assetType}</td>
                     <td>${row.assetSubclass} (${row.assetClass})</td>
                     <td>${row.enforcementPoint}</td>
-                    ${attributes.map((attr) => `<td>${row[attr.name] || ""}</td>`).join("")}
+                    ${attributes.map((attr: Attribute) => `<td>${row[attr.name] || ""}</td>`).join("")}
                   </tr>
                 `,
                   )
@@ -1127,7 +1342,7 @@ export function FrameworkTable() {
             <tbody>
               ${attributes
                 .map(
-                  (attr) => `
+                  (attr: Attribute) => `
                 <tr>
                   <td>${attr.name}</td>
                   <td>${attr.tooltip}</td>
@@ -1202,7 +1417,7 @@ export function FrameworkTable() {
                   <label className="text-sm font-medium mb-2 block">Attribute Name</label>
                   <Input
                     value={newAttributeName}
-                    onChange={(e) => setNewAttributeName(e.target.value)}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => setNewAttributeName(e.target.value)}
                     placeholder="Enter attribute name"
                   />
                 </div>
@@ -1210,7 +1425,7 @@ export function FrameworkTable() {
                   <label className="text-sm font-medium mb-2 block">Tooltip Description</label>
                   <Input
                     value={newAttributeTooltip}
-                    onChange={(e) => setNewAttributeTooltip(e.target.value)}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => setNewAttributeTooltip(e.target.value)}
                     placeholder="Enter tooltip text"
                   />
                 </div>
@@ -1240,7 +1455,7 @@ export function FrameworkTable() {
                   <label className="text-sm font-medium mb-2 block">Safeguard</label>
                   <Select
                     value={newRowSafeguard}
-                    onValueChange={(value) => {
+                    onValueChange={(value: string) => {
                       setNewRowSafeguard(value)
                       // Reset asset selections when safeguard changes
                       setNewRowAssetType("")
@@ -1252,7 +1467,7 @@ export function FrameworkTable() {
                       <SelectValue placeholder="Select safeguard" />
                     </SelectTrigger>
                     <SelectContent>
-                      {getAllSafeguards().map((safeguard) => (
+                      {getAllSafeguards().map((safeguard: Safeguard) => (
                         <SelectItem key={safeguard.id} value={safeguard.id}>
                           {safeguard.name}
                         </SelectItem>
@@ -1266,7 +1481,7 @@ export function FrameworkTable() {
                     <label className="text-sm font-medium mb-2 block">Asset Type</label>
                     <Select
                       value={newRowAssetType}
-                      onValueChange={(value) => {
+                      onValueChange={(value: string) => {
                         setNewRowAssetType(value)
                         // Reset class and subclass when type changes
                         setNewRowAssetClass("")
@@ -1277,7 +1492,7 @@ export function FrameworkTable() {
                         <SelectValue placeholder="Select asset type" />
                       </SelectTrigger>
                       <SelectContent>
-                        {getApplicableAssetTypes(newRowSafeguard).map((type) => (
+                        {getApplicableAssetTypes(newRowSafeguard).map((type: AssetType) => (
                           <SelectItem key={type.id} value={type.id}>
                             {type.name}
                           </SelectItem>
@@ -1292,7 +1507,7 @@ export function FrameworkTable() {
                     <label className="text-sm font-medium mb-2 block">Asset Class</label>
                     <Select
                       value={newRowAssetClass}
-                      onValueChange={(value) => {
+                      onValueChange={(value: string) => {
                         setNewRowAssetClass(value)
                         // Reset subclass when class changes
                         setNewRowAssetSubclass("")
@@ -1302,7 +1517,7 @@ export function FrameworkTable() {
                         <SelectValue placeholder="Select asset class" />
                       </SelectTrigger>
                       <SelectContent>
-                        {getAssetClassesForType(newRowAssetType).map((cls) => (
+                        {getAssetClassesForType(newRowAssetType).map((cls: AssetClass) => (
                           <SelectItem key={cls.id} value={cls.id}>
                             {cls.name}
                           </SelectItem>
@@ -1320,7 +1535,7 @@ export function FrameworkTable() {
                         <SelectValue placeholder="Select asset subclass" />
                       </SelectTrigger>
                       <SelectContent>
-                        {getAssetSubclassesForClass(newRowAssetClass).map((subclass) => (
+                        {getAssetSubclassesForClass(newRowAssetClass).map((subclass: AssetSubclass) => (
                           <SelectItem key={subclass.id} value={subclass.id}>
                             {subclass.name}
                           </SelectItem>
@@ -1377,7 +1592,7 @@ export function FrameworkTable() {
                   <TableHead className="w-[200px] font-bold">Asset Class or Subclass</TableHead>
                   <TableHead className="w-[200px] font-bold">Enforcement Point</TableHead>
                   <TooltipProvider>
-                    {attributes.map((attr) => (
+                    {attributes.map((attr: Attribute) => (
                       <TableHead key={attr.id} className="min-w-[150px] font-bold">
                         <div className="flex items-center gap-1">
                           {attr.name}
@@ -1399,7 +1614,7 @@ export function FrameworkTable() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {rows.map((row) => (
+                {rows.map((row: { id: string; safeguardId: string; assetSubclassId: string; assetClassId?: string; assetTypeId?: string }) => (
                   <TableRow key={row.id} className="group">
                     <TableCell className="font-medium">
                       <div className="flex justify-between items-center">
@@ -1413,7 +1628,7 @@ export function FrameworkTable() {
                           size="icon"
                           variant="ghost"
                           className="h-8 w-8 text-destructive opacity-0 group-hover:opacity-100"
-                          onClick={(e) => {
+                          onClick={(e: MouseEvent<HTMLButtonElement>) => {
                             e.stopPropagation()
                             handleDeleteRow(row.id)
                           }}
@@ -1459,7 +1674,7 @@ export function FrameworkTable() {
                         <div className="flex items-center space-x-1">
                           <Input
                             value={editValue}
-                            onChange={(e) => setEditValue(e.target.value)}
+                            onChange={(e: ChangeEvent<HTMLInputElement>) => setEditValue(e.target.value)}
                             className="h-8"
                             autoFocus
                           />
@@ -1492,13 +1707,13 @@ export function FrameworkTable() {
                         </div>
                       )}
                     </TableCell>
-                    {attributes.map((attr) => (
+                    {attributes.map((attr: Attribute) => (
                       <TableCell key={`${row.id}-${attr.id}`}>
                         {editingCell && editingCell.rowId === row.id && editingCell.attributeId === attr.id ? (
                           <div className="flex items-center space-x-1">
                             <Input
                               value={editValue}
-                              onChange={(e) => setEditValue(e.target.value)}
+                              onChange={(e: ChangeEvent<HTMLInputElement>) => setEditValue(e.target.value)}
                               className="h-8"
                               autoFocus
                             />
@@ -1549,7 +1764,7 @@ export function FrameworkTable() {
                   <TableHead className="w-[200px] font-bold">Asset Class or Subclass</TableHead>
                   <TableHead className="w-[200px] font-bold">Enforcement Point</TableHead>
                   <TooltipProvider>
-                    {attributes.map((attr) => (
+                    {attributes.map((attr: Attribute) => (
                       <TableHead key={attr.id} className="min-w-[150px] font-bold">
                         <div className="flex items-center gap-1">
                           {attr.name}
@@ -1571,7 +1786,7 @@ export function FrameworkTable() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {rows.map((row) => (
+                {rows.map((row: { id: string; safeguardId: string; assetSubclassId: string; assetClassId?: string; assetTypeId?: string }) => (
                   <TableRow key={row.id} className="group">
                     <TableCell className="font-medium">
                       <div className="flex justify-between items-center">
@@ -1585,7 +1800,7 @@ export function FrameworkTable() {
                           size="icon"
                           variant="ghost"
                           className="h-8 w-8 text-destructive opacity-0 group-hover:opacity-100"
-                          onClick={(e) => {
+                          onClick={(e: MouseEvent<HTMLButtonElement>) => {
                             e.stopPropagation()
                             handleDeleteRow(row.id)
                           }}
@@ -1631,7 +1846,7 @@ export function FrameworkTable() {
                         <div className="flex items-center space-x-1">
                           <Input
                             value={editValue}
-                            onChange={(e) => setEditValue(e.target.value)}
+                            onChange={(e: ChangeEvent<HTMLInputElement>) => setEditValue(e.target.value)}
                             className="h-8"
                             autoFocus
                           />
@@ -1664,7 +1879,7 @@ export function FrameworkTable() {
                         </div>
                       )}
                     </TableCell>
-                    {attributes.map((attr) => (
+                    {attributes.map((attr: Attribute) => (
                       <TableCell key={`${row.id}-${attr.id}`}>
                         {editingOutcomeCell &&
                         editingOutcomeCell.rowId === row.id &&
@@ -1672,7 +1887,7 @@ export function FrameworkTable() {
                           <div className="flex items-center space-x-1">
                             <Input
                               value={editValue}
-                              onChange={(e) => setEditValue(e.target.value)}
+                              onChange={(e: ChangeEvent<HTMLInputElement>) => setEditValue(e.target.value)}
                               className="h-8"
                               autoFocus
                             />
